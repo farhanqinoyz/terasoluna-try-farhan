@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pelatihan.terasoluna.domain.repository.StockRepository">
+  <select id="isCodeBarangExist" parameterType="string" resultType="boolean">
+    SELECT EXISTS (
+    SELECT 1
+    FROM stock
+    WHERE code_barang = 'YOUR_CODE_HERE'
+    );)
+  </select>
+  <insert id="insertStock" parameterType="com.pelatihan.terasoluna.domain.model.Stock">
+    INSERT INTO stock (codeBarang, jumlah)
+    VALUES (#{codeBarang}, #{jumlah})
+  </insert>
+  <update id="updateStock" parameterType="com.pelatihan.terasoluna.domain.model.Stock">
+    UPDATE stock
+    SET jumlah = #{jumlah}
+    WHERE codeBarang = #{codeBarang}
+  </update>
+  <update id="batchUpdate" parameterType="java.util.List">
+    <foreach collection="stockList" item="item" separator=";">
+      UPDATE stock
+      SET
+      jumlah = #{item.jumlah},
+      WHERE
+      item_code = #{item.codeBarang}
+    </foreach>
+  </update>
+  <insert id="batchInsert" parameterType="java.util.List">
+    INSERT INTO stock (
+    jumlah,
+    code_barang
+    )
+    VALUES
+    <foreach collection="stockList" item="item" separator=",">
+      (
+      #{item.itemCode},
+      #{item.quantity}
+      )
+    </foreach>
+  </insert>
+  <select id="findAllByItemCodeIn" parameterType="java.util.List" resultType="com.pelatihan.terasoluna.domain.model.Stock">
+    SELECT * FROM stock
+    WHERE code_barang IN
+    <foreach item="codeBarangId" collection="list" open="(" separator="," close=")">
+      #{codeBarangId}
+    </foreach>
+  </select>
+</mapper>
