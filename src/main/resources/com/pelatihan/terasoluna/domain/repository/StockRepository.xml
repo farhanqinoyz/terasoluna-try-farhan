@@ -10,39 +10,39 @@
   </select>
   <insert id="insertStock" parameterType="com.pelatihan.terasoluna.domain.model.Stock">
     INSERT INTO stock (codeBarang, jumlah)
-    VALUES (#{codeBarang}, #{jumlah})
+    VALUES (#{codeBarang}, #{jumlah, jdbcType=INTEGER})
   </insert>
   <update id="updateStock" parameterType="com.pelatihan.terasoluna.domain.model.Stock">
     UPDATE stock
-    SET jumlah = #{jumlah}
+    SET jumlah = #{jumlah, jdbcType=INTEGER}
     WHERE codeBarang = #{codeBarang}
   </update>
   <update id="batchUpdate" parameterType="java.util.List">
-    <foreach collection="stockList" item="item" separator=";">
+    <foreach collection="collection" item="item" separator=";">
       UPDATE stock
       SET
-      jumlah = #{item.jumlah},
+      jumlah = #{item.jumlah}
       WHERE
-      item_code = #{item.codeBarang}
+      code_barang = #{item.codeBarang}
     </foreach>
   </update>
   <insert id="batchInsert" parameterType="java.util.List">
     INSERT INTO stock (
-    jumlah,
-    code_barang
+    code_barang,
+    jumlah
     )
     VALUES
-    <foreach collection="stockList" item="item" separator=",">
+    <foreach collection="collection" item="item" separator=",">
       (
-      #{item.itemCode},
-      #{item.quantity}
+      #{item.codeBarang},
+      #{item.jumlah}
       )
     </foreach>
   </insert>
   <select id="findAllByItemCodeIn" parameterType="java.util.List" resultType="com.pelatihan.terasoluna.domain.model.Stock">
     SELECT * FROM stock
     WHERE code_barang IN
-    <foreach item="codeBarangId" collection="list" open="(" separator="," close=")">
+    <foreach item="codeBarangId" collection="codeBarangIds" open="(" separator="," close=")">
       #{codeBarangId}
     </foreach>
   </select>
