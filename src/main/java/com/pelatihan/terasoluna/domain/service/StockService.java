@@ -6,5 +6,6 @@ import java.util.List;
 public interface StockService {
 
   void uploadExcelFileToDatabase(List<Stock> stocks);
+  List<Stock> findAll();
 
 }

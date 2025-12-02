@@ -3,6 +3,7 @@ package com.pelatihan.terasoluna.domain.repository;
 import com.pelatihan.terasoluna.domain.model.Stock;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface StockRepository {
@@ -11,5 +12,6 @@ public interface StockRepository {
   void updateStock(Stock stock);
   void batchInsert(List<Stock> stock);
   void batchUpdate(List<Stock> stock);
-  List<Stock> findAllByItemCodeIn(List<String> codeBarangIds);
+  List<Stock> findAllByItemCodeIn(@Param("codeBarangIds") List<String> codeBarangIds);
+  List<Stock> findAll();
 }

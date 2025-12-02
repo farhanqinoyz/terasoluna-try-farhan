@@ -46,4 +46,7 @@
       #{codeBarangId}
     </foreach>
   </select>
+  <select id="findAll" resultType="com.pelatihan.terasoluna.domain.model.Stock">
+    SELECT * FROM stock
+  </select>
 </mapper>

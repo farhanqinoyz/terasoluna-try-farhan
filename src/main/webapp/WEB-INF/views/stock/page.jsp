@@ -16,12 +16,13 @@
       <form:form action="${pageContext.request.contextPath}/stock/excel/upload/"
                  method="post"
                  enctype="multipart/form-data">
-
-          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-
           <input type="file" name="excelFile"/>
           <button type="submit">Upload File</button>
 
+      </form:form>
+      <form:form action="${pageContext.request.contextPath}/stock/excel/export/"
+                 method="get">
+          <button type="submit">Import File</button>
       </form:form>
   </div>
 </body>

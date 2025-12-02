@@ -50,6 +50,11 @@ public class StockServiceImpl implements StockService {
     }
   }
 
+  @Override
+  public List<Stock> findAll(){
+    return stockRepository.findAll();
+  }
+
   private List<Stock> mergeStockQuantities(List<Stock> rawStocks) {
     Map<String, Stock> map = new HashMap<>();
 
