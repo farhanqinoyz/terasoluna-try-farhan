@@ -1,15 +1,12 @@
-package com.pelatihan.terasoluna.domain.model;
+package com.pelatihan.terasoluna.app.stock.dto;
 
 import java.math.BigInteger;
 
-public class Stock {
+public class StockMenuDto {
   private String codeBarang;
   private String nama;
   private int jumlah;
   private BigInteger harga;
-
-  public Stock() {
-  }
 
   public String getCodeBarang() {
     return codeBarang;
@@ -17,6 +14,14 @@ public class Stock {
 
   public void setCodeBarang(String codeBarang) {
     this.codeBarang = codeBarang;
+  }
+
+  public String getNama() {
+    return nama;
+  }
+
+  public void setNama(String nama) {
+    this.nama = nama;
   }
 
   public int getJumlah() {
@@ -35,22 +40,10 @@ public class Stock {
     this.harga = harga;
   }
 
-  public String getNama() {
-    return nama;
-  }
-
-  public void setNama(String nama) {
+  public StockMenuDto(String codeBarang, String nama, int jumlah, BigInteger harga) {
+    this.codeBarang = codeBarang;
     this.nama = nama;
-  }
-
-
-  @Override
-  public String toString() {
-    return "Stock{" +
-        "codeBarang='" + codeBarang + '\'' +
-        ", nama='" + nama + '\'' +
-        ", jumlah=" + jumlah +
-        ", harga=" + harga +
-        '}';
+    this.jumlah = jumlah;
+    this.harga = harga;
   }
 }

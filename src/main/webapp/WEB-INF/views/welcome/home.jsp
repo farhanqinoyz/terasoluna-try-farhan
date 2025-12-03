@@ -15,6 +15,9 @@
         <form action="${pageContext.request.contextPath}/stock/excel/" method="get">
             <button type="submit">Go to Upload Excel</button>
         </form>
+        <form action="${pageContext.request.contextPath}/stock/menu/" method="get">
+            <button type="submit">Go to see Stock Menu</button>
+        </form>
     </div>
 
 </body>
