@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pelatihan.terasoluna.domain.repository.CartRepository">
+  <select id="addItemToCart" resultType="int">
+    INSERT INTO cart (item_id, cart_quantity, last_modified)
+    VALUES (#{itemId}, #{incomingQuantity}, NOW())
+    ON CONFLICT (item_id)
+    DO UPDATE SET
+    cart_quantity = cart.cart_quantity + EXCLUDED.cart_quantity,
+    last_modified = NOW()
+    RETURNING cart_quantity;
+  </select>
+</mapper>
