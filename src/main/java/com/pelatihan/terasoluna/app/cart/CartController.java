@@ -1,29 +1,33 @@
 package com.pelatihan.terasoluna.app.cart;
 
+import com.pelatihan.terasoluna.domain.dto.ShowCartDTO;
+import com.pelatihan.terasoluna.domain.model.Cart;
 import com.pelatihan.terasoluna.domain.service.CartService;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 @RequestMapping("cart/")
 public class CartController {
+
   @Autowired
   CartService cartService;
 
-  @PostMapping("add-to-cart/{itemId}")
-  public Integer addToCart(@PathVariable("itemId") String itemId) {
-    /*
-   TODO:
-    add validation, receives a itemId, does it exist or not
-    check is it exist or not
-     */
+  @GetMapping("/")
+  public String showCart(Model model) {
+    List<ShowCartDTO> cartList = cartService.showCart();
+    int amountTotal = cartList.stream()
+        .mapToInt(ShowCartDTO::getSubTotal)
+        .sum();
 
+    model.addAttribute("cartList", cartList);
+    model.addAttribute("amountTotal", amountTotal);
 
-    return cartService.addItemToCart(itemId, 1);
+    return "cart/list";
   }
 }

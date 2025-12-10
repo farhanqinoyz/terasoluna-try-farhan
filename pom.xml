@@ -259,13 +259,11 @@
         <!-- == End Unit Test == -->
 
         <!-- == Begin Coding Support == -->
-        <!--
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
-        -->
         <!-- == End Coding Support == -->
 
         <!-- for uploading stuff-->
@@ -322,6 +320,13 @@
             <artifactId>postgresql</artifactId>
             <version>42.7.2</version>
         </dependency>
+
+<!--        Kafka-->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
     </dependencies>
 
     <properties>

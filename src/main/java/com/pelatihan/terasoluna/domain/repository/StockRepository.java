@@ -1,5 +1,6 @@
 package com.pelatihan.terasoluna.domain.repository;
 
+import com.pelatihan.terasoluna.domain.dto.CartDecreaseQuantityDTO;
 import com.pelatihan.terasoluna.domain.model.Stock;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,4 +15,5 @@ public interface StockRepository {
   void batchUpdate(List<Stock> stock);
   List<Stock> findAllByItemCodeIn(@Param("codeBarangIds") List<String> codeBarangIds);
   List<Stock> findAll();
+  void decreaseStockByCart(List<CartDecreaseQuantityDTO> cartDecreaseQuantityDTOList);
 }

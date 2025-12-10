@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: arcti
-  Date: 03/12/2025
-  Time: 09:22
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,9 +10,15 @@
     <script type="text/javascript">
       const contextPath = "${pageContext.request.contextPath}";
     </script>
+    <script src="${pageContext.request.contextPath}/resources/app/js/toastUtils.js"></script>
     <script src="${pageContext.request.contextPath}/resources/app/js/addToCart.js"></script>
 </head>
 <body>
+    <div>
+        <button onclick="window.location.href='<c:url value="/cart/"/>'">
+            See your cart
+        </button>
+    </div>
     <table>
         <h2>Current Stock Menu</h2>
 

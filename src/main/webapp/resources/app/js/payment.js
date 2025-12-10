@@ -1,4 +1,4 @@
-function addToCart(id) {
+function pay() {
   const baseUrl = contextPath ? contextPath : "";
 
   const csrfTokenMeta = document.querySelector('meta[name="_csrf"]');
@@ -7,7 +7,7 @@ function addToCart(id) {
   const csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : '';
   const csrfHeader = csrfHeaderMeta ? csrfHeaderMeta.getAttribute('content') : 'X-CSRF-TOKEN';
 
-  fetch(baseUrl + '/cart/add-to-cart/' + id, {
+  fetch(baseUrl + '/cart/payment/', {
     method: 'POST',
     headers: {
       [csrfHeader]: csrfToken,
@@ -16,12 +16,12 @@ function addToCart(id) {
   })
   .then(response => {
     if (!response.ok) throw new Error('Network error');
-    return response.json();
+    return response;
   })
   .then(data => {
-    showToast("Success adding item to cart", "success");
+    showToast("Success to proceed payment", "success");
   })
   .catch((error) => {
-    showToast("Error adding item! Please Try Again", "error");
+    showToast("Error occurs! Please Try Again" + error, "error");
   });
 }

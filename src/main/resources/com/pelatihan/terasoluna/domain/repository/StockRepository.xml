@@ -49,4 +49,13 @@
   <select id="findAll" resultType="com.pelatihan.terasoluna.domain.model.Stock">
     SELECT * FROM stock
   </select>
+  <update id="decreaseStockByCart" parameterType="com.pelatihan.terasoluna.domain.dto.CartDecreaseQuantityDTO">
+    <foreach collection="collection" item="item" separator=";">
+      UPDATE stock
+      SET
+      jumlah = jumlah - #{item.quantity}
+      WHERE
+      code_barang = #{item.itemId}
+    </foreach>
+  </update>
 </mapper>

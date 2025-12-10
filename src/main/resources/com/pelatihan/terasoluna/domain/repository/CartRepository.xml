@@ -10,4 +10,27 @@
     last_modified = NOW()
     RETURNING cart_quantity;
   </select>
+
+  <select id="showCart" resultType="com.pelatihan.terasoluna.domain.dto.ShowCartDTO">
+    SELECT cart.item_id AS itemId, stock.nama AS itemName, cart.cart_quantity AS quantity,
+           stock.harga AS price, stock.harga * cart.cart_quantity AS subTotal
+    FROM cart
+    INNER JOIN stock ON stock.code_barang = cart.item_id
+    ORDER BY cart.last_modified
+  </select>
+
+  <select id="totalAmountOfCart" resultType="int">
+    SELECT sum(stock.harga * cart.cart_quantity)
+    FROM cart
+    INNER JOIN stock ON stock.code_barang = cart.item_id
+  </select>
+
+  <select id="getDecreaseQuantityDTO" resultType="com.pelatihan.terasoluna.domain.dto.CartDecreaseQuantityDTO">
+    SELECT cart.item_id as itemId, cart.cart_quantity as quantity
+    FROM cart
+  </select>
+
+  <delete id="deleteAll">
+    DELETE FROM cart
+  </delete>
 </mapper>
