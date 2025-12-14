@@ -13,4 +13,5 @@ public interface CartRepository {
   Integer totalAmountOfCart();
   List<CartDecreaseQuantityDTO> getDecreaseQuantityDTO();
   void deleteAll();
+  Boolean isIncomingQuantityExceedingStock(@Param("itemId") String itemId, @Param("incomingQuantity") int incomingQuantity);
 }

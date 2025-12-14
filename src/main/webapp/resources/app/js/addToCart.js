@@ -15,13 +15,17 @@ function addToCart(id) {
     }
   })
   .then(response => {
-    if (!response.ok) throw new Error('Network error');
+    if (!response.ok) {
+      //TODO: receive error message from backend
+      throw new Error('Network error');
+    }
     return response.json();
   })
   .then(data => {
     showToast("Success adding item to cart", "success");
   })
   .catch((error) => {
-    showToast("Error adding item! Please Try Again", "error");
+    console.log(error);
+    showToast("Error adding item: "+error+"\nPlease Try Again", "error");
   });
 }

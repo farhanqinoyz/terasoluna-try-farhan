@@ -1,5 +1,6 @@
 package com.pelatihan.terasoluna.app.cart;
 
+import com.pelatihan.terasoluna.domain.dto.AddItemToCartOutput;
 import com.pelatihan.terasoluna.domain.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,15 +15,13 @@ public class CartRestController {
   CartService cartService;
 
   @PostMapping("add-to-cart/{itemId}")
-  public Integer addToCart(@PathVariable("itemId") String itemId) {
-    /*
-   TODO:
-    add validation, receives a itemId, does it exist or not
-    check is it exist or not
-     */
+  public AddItemToCartOutput addToCart(@PathVariable("itemId") String itemId) throws Exception {
+    AddItemToCartOutput output = cartService.addItemToCart(itemId, 1);
+    if(!output.getErrorList().isEmpty()){
+      throw new Exception("Quantity is exceeding limit");
+    }
 
-
-    return cartService.addItemToCart(itemId, 1);
+    return output;
   }
 
   @PostMapping("payment/")

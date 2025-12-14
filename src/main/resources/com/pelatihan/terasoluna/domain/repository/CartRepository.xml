@@ -33,4 +33,14 @@
   <delete id="deleteAll">
     DELETE FROM cart
   </delete>
+
+  <select id="isIncomingQuantityExceedingStock" resultType="Boolean">
+    SELECT CASE
+        WHEN cart.item_id IS NOT NULL AND cart.cart_quantity + #{incomingQuantity} > stock.jumlah
+            THEN true ELSE false
+        END
+    FROM stock
+    LEFT JOIN cart ON stock.code_barang = cart.item_id
+    WHERE stock.code_barang = #{itemId}
+  </select>
 </mapper>

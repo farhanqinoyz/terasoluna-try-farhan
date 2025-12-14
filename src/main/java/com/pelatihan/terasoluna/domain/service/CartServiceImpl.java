@@ -1,7 +1,9 @@
 package com.pelatihan.terasoluna.domain.service;
 
+import com.pelatihan.terasoluna.domain.dto.AddItemToCartOutput;
 import com.pelatihan.terasoluna.domain.dto.ShowCartDTO;
 import com.pelatihan.terasoluna.domain.repository.CartRepository;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +20,17 @@ public class CartServiceImpl implements CartService {
   KafkaTemplate<String, String> kafkaTemplate;
 
   @Override
-  public Integer addItemToCart(String itemId, int incomingQuantity){
-    return cartRepository.addItemToCart(itemId, incomingQuantity);
+  public AddItemToCartOutput addItemToCart(String itemId, int incomingQuantity){
+    AddItemToCartOutput output = new AddItemToCartOutput();
+    if(cartRepository.isIncomingQuantityExceedingStock(itemId, incomingQuantity)){
+      output.setErrorList(Collections.singletonList("Stock is not enough!"));
+      return output;
+    }
+
+    Integer totalQuantityAfterAdded = cartRepository.addItemToCart(itemId, incomingQuantity);
+    output.setTotalQuantityAfterAdded(totalQuantityAfterAdded);
+
+    return output;
   }
 
   @Override
